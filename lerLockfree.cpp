@@ -6,16 +6,8 @@
 volatile u_int64_t freelock;
 int share_data = 0;
 
-bool trylock(volatile u_int64_t *plock)
-{
-	return (*plock==0 && __sync_bool_compare_and_swap(plock, 0, 1));
-}
-
-int unlock(volatile u_int64_t *plock)
-{
-	*plock = 0;
-	return 0;
-} 
+#define trylock(plock) (*(plock)==0 && __sync_bool_compare_and_swap((plock), 0, 1))
+#define unlock(plock) *(plock) = 0
 
 void *testthr(void *pinvok)
 {
