@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+
+
+aaaa
 typedef struct {
 	unsigned uta:1;
 	unsigned utb:1;
